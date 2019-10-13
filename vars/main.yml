@@ -1,0 +1,46 @@
+---
+# vars file for aairey.os_base
+
+fedora_common_packages:
+  - '@Development Tools'
+  - python3-pip
+  - npm
+  - vim
+  - fzf
+  - ripgrep
+  - fd-find
+  - asciinema
+  - zsh
+  - htop
+  - iftop
+
+fedora_workstation_repos:
+  - google-chrome
+  - rpmfusion-nonfree-nvidia-driver
+  - rpmfusion-nonfree-steam
+
+fedora_workstation_packages:
+  # - '@Fedora Workstation'
+  - vim-X11
+  - keepass
+  - putty
+  - gnome-tweak-tool
+  - openvpn
+  - vagrant
+  - vagrant-libvirt
+  - qt-virt-manager
+  - remmina
+  - flash-plugin
+  - alsa-plugins-pulseaudio
+  - libcurl
+  - google-chrome-stable
+  - java-openjdk
+  - icedtea-web
+  - wine
+  - buildah
+  - podman
+
+fedora_server_packages:
+  - '@Infrastructure Server'
+  - neofetch
+  - byobu

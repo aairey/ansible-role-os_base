@@ -1,0 +1,35 @@
+---
+- name: Install Packages
+  become: yes
+  dnf:
+    name: "{{ fedora_server_packages }}"
+    state: present
+
+- name: Check if byobu is enabled
+  become: yes
+  # become_user: "{{ username }}"
+  command: grep -Fxq "_byobu_sourced=1 . /usr/bin/byobu-launch" .profile
+  register: byobu_enabled
+  check_mode: no
+  ignore_errors: yes
+  changed_when: no
+
+- name: Enable byobu
+  become: yes
+  # become_user: "{{ username }}"
+  command: byobu-enable
+  tags:
+    - skip_ansible_lint
+  when: byobu_enabled.rc == 1
+
+- name: 'Set up cronjob for motd generation'
+  become: yes
+  cron:
+    job: "/bin/bash -l -c '/usr/bin/neofetch > /etc/motd 2>/dev/null'"
+    minute: '*/10'
+    name: update motd
+
+- name: Install podman-compose
+  become: yes
+  pip:
+    name: podman-compose

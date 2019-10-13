@@ -1,0 +1,39 @@
+---
+sudo: required
+language: python
+python:
+  - '3.7'
+services:
+  - docker
+
+env:
+  global:
+    ROLE_NAME: os_base
+  matrix:
+    - ANSIBLE_VERSION=2.8
+      MOLECULE_DISTRO=fedora30
+      MOLECULE_FEDORA_EDITION=workstation
+    - ANSIBLE_VERSION=2.9
+      MOLECULE_DISTRO=fedora30
+      MOLECULE_FEDORA_EDITION=workstation
+    - ANSIBLE_VERSION=2.8
+      MOLECULE_DISTRO=fedora30
+      MOLECULE_FEDORA_EDITION=server
+    - ANSIBLE_VERSION=2.9
+      MOLECULE_DISTRO=fedora30
+      MOLECULE_FEDORA_EDITION=server
+before_install:
+  - sudo apt-get -qq update
+install:
+  - pip install tox-travis
+
+before_script:
+  # Use actual Ansible Galaxy role name for the project directory.
+  - cd ../
+    && mv ansible-role-$ROLE_NAME aairey.$ROLE_NAME
+    && cd aairey.$ROLE_NAME
+script:
+  - tox
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/

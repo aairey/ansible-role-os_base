@@ -1,0 +1,62 @@
+---
+- name: Install repository prerequisites
+  dnf:
+    name:
+      - fedora-workstation-repositories
+      - dnf-plugins-core
+      - 'http://linuxdownload.adobe.com/adobe-release/adobe-release-i386-1.0-1.noarch.rpm'
+    state: installed
+
+- name: Check if we need to install third-party repositories
+  become: yes
+  changed_when: no
+  shell: |
+    set -o pipefail
+    dnf config-manager --dump {{ item }} | sed -n -e 's/enabled = //p'
+  register: third_party_repos
+  with_items: "{{ fedora_workstation_repos }}"
+  args:
+    warn: false
+
+- name: Install official third-party repositories
+  become: yes
+  command: "dnf config-manager --set-enabled {{ item.item }}"
+  with_items: "{{ third_party_repos.results }}"
+  when: item.stdout == '0'
+  args:
+    warn: false
+
+- name: Install Packages
+  become: yes
+  dnf:
+    name: "{{ fedora_workstation_packages }}"
+    state: present
+
+- name: Add the flathub flatpak repository remote to the system installation
+  become: yes
+  flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+
+- name: Install Flatpaks from flathub
+  become: yes
+  flatpak:
+    name: "{{ item }}"
+    remote: flathub
+  with_items:
+    - org.libreoffice.LibreOffice
+    - com.visualstudio.code.oss
+    - com.slack.Slack
+    - org.clementine_player.Clementine
+    - com.spotify.Client
+    - org.videolan.VLC
+    - com.discordapp.Discord
+    - com.valvesoftware.Steam
+    - org.fedoraproject.MediaWriter
+
+- name: Enable Night Light
+  tags: molecule-notest
+  dconf:
+    key: /org/gnome/settings-daemon/plugins/color/night-light-enabled
+    value: true

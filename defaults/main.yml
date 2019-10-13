@@ -1,0 +1,4 @@
+---
+# defaults file for aairey.os_base
+username: aairey
+fedora_edition: 'workstation'

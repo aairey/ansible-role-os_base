@@ -1,0 +1,22 @@
+---
+# tasks file for aairey.os_base
+- include_tasks: setup-RedHat.yml
+  when: ansible_os_family == 'RedHat'
+
+- include_tasks: setup-Debian.yml
+  when: ansible_os_family == 'Debian'
+
+- name: Install gtop
+  become: yes
+  npm:
+    name: gtop
+    state: present
+    global: yes
+
+- name: Install awscli
+  become: true
+  pip:
+    name: awscli
+    state: present
+    executable: pip3
+    extra_args: '--user'
