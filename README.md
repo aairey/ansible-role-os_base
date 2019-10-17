@@ -2,8 +2,8 @@ aairey.os_base
 ==============
 
 [![Build Status](https://travis-ci.org/aairey/ansible-role-os_base.svg?branch=master)](https://travis-ci.org/aairey/ansible-role-os_base)
-[![ansible galaxy](https://img.shields.io/ansible/role/43972)](https://galaxy.ansible.com/aairey/os_base)
-[![role downloads](https://img.shields.io/ansible/role/d/43972)](https://galaxy.ansible.com/aairey/os_base)
+[![ansible galaxy](https://img.shields.io/ansible/role/44039)](https://galaxy.ansible.com/aairey/os_base)
+[![role downloads](https://img.shields.io/ansible/role/d/44039)](https://galaxy.ansible.com/aairey/os_base)
 
 Role to prepare OS for further consumption by myself
 
