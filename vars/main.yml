@@ -13,6 +13,7 @@ fedora_common_packages:
   - zsh
   - htop
   - iftop
+  - glances
 
 fedora_workstation_repos:
   - google-chrome
