@@ -4,6 +4,10 @@
   dnf:
     name: "{{ fedora_server_packages }}"
     state: present
+  retries: 5
+  delay: 2
+  register: fedora_server_packages_installation
+  until: fedora_server_packages_installation is succeeded
 
 - name: Check if byobu is enabled
   become: yes
@@ -33,3 +37,5 @@
   become: yes
   pip:
     name: podman-compose
+    executable: pip3
+    extra_args: '--user'
