@@ -20,3 +20,31 @@
     state: present
     executable: pip3
     extra_args: '--user'
+
+- name: Linux | Get the latest published full release of vivid
+  uri:
+    url: https://api.github.com/repos/sharkdp/vivid/releases/latest
+    return_content: yes
+  register: vivid_index
+
+- name: Linux | Filter the latest vivid version
+  set_fact:
+    vivid_version_to_install: "{{ (vivid_index.content | from_json).name }}"
+
+# This task avoids downloading vivid every time
+- name: Linux | Check if vivid is present with the right version
+  command: "/usr/local/bin/vivid --version"
+  register: vivid_installed_version
+  ignore_errors: yes
+  changed_when: false
+  failed_when: false
+
+- name: Linux | Install vivid
+  unarchive:
+    src: "https://github.com/sharkdp/vivid/releases/download/{{ vivid_version_to_install }}/vivid-{{ vivid_version_to_install }}-x86_64-unknown-linux-gnu.tar.gz"
+    dest: "/usr/local/bin/vivid"
+    extra_opts:
+      - vivid
+    mode: u+x,g+x,o+x
+    remote_src: yes
+  when: vivid_version_to_install not in vivid_installed_version.stdout_lines | default('empty') | first
