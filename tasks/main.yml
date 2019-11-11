@@ -41,8 +41,9 @@
 
 - name: Linux | Install vivid
   unarchive:
-    src: "https://github.com/sharkdp/vivid/releases/download/{{ vivid_version_to_install }}/vivid-{{ vivid_version_to_install }}-x86_64-unknown-linux-gnu.tar.gz"
-    dest: "/usr/local/bin/vivid"
+    src: "https://github.com/sharkdp/vivid/releases/download/{{ vivid_version_to_install }}/\
+      vivid-{{ vivid_version_to_install }}-x86_64-unknown-linux-gnu.tar.gz"
+    dest: "/usr/local/bin/"
     extra_opts:
       - vivid
     mode: u+x,g+x,o+x
