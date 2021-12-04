@@ -50,4 +50,4 @@
     mode: u+x,g+x,o+x
     remote_src: yes
   become: yes
-  when: vivid_index.json.name not in vivid_installed_version.stdout_lines | default('empty') | first
+  when: vivid_index.json.name not in vivid_installed_version.stdout_lines | first | default('empty')
