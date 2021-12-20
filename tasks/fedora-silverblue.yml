@@ -1,0 +1,21 @@
+---
+- name: Install overlay packages
+  community.general.rpm_ostree_pkg:
+    name: "{{ item }}"
+    state: present
+  become: yes
+  loop: "{{ fedora_silverblue_overlays }}"
+
+- name: Add the flathub flatpak repository remote to the system installation
+  become: yes
+  flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+
+- name: Install Flatpaks from flathub
+  become: yes
+  flatpak:
+    name: "{{ item }}"
+    remote: flathub
+  loop: "{{ fedora_flatpaks }}"

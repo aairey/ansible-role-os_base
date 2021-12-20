@@ -1,10 +1,10 @@
 ---
 - name: Install repository prerequisites
+  become: yes
   dnf:
     name:
       - fedora-workstation-repositories
       - dnf-plugins-core
-      - 'http://linuxdownload.adobe.com/adobe-release/adobe-release-i386-1.0-1.noarch.rpm'
     state: installed
   retries: 5
   delay: 2
@@ -52,19 +52,4 @@
   flatpak:
     name: "{{ item }}"
     remote: flathub
-  with_items:
-    - org.libreoffice.LibreOffice
-    - com.visualstudio.code.oss
-    - com.slack.Slack
-    - org.clementine_player.Clementine
-    - com.spotify.Client
-    - org.videolan.VLC
-    - com.discordapp.Discord
-    - com.valvesoftware.Steam
-    - org.fedoraproject.MediaWriter
-
-- name: Enable Night Light
-  tags: molecule-notest
-  dconf:
-    key: /org/gnome/settings-daemon/plugins/color/night-light-enabled
-    value: true
+  with_items: "{{ fedora_flatpaks }}"

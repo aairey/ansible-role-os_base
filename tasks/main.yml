@@ -6,48 +6,61 @@
 - include_tasks: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 
-- name: Install gtop
-  become: yes
-  npm:
-    name: gtop
-    state: present
-    global: yes
+- name: Install extra tools
+  block:
+  - name: Install gtop
+    become: yes
+    npm:
+      name: gtop
+      state: present
+      global: yes
+  
+  - name: Install awscli
+    become: true
+    pip:
+      name: awscli
+      state: present
+      executable: pip3
+      extra_args: '--user'
+  
+  - name: Linux | Get the latest published full release of vivid
+    uri:
+      url: https://api.github.com/repos/sharkdp/vivid/releases/latest
+      return_content: yes
+    check_mode: no
+    register: vivid_index
+  
+  # This task avoids downloading vivid every time
+  - name: Linux | Check if vivid is present with the right version
+    command: "/usr/local/bin/vivid --version"
+    register: vivid_installed_version
+    ignore_errors: yes
+    changed_when: false
+    failed_when: false
+    check_mode: no
+  
+  - name: Linux | Install vivid
+    unarchive:
+      src: "https://github.com/sharkdp/vivid/releases/download/{{ vivid_index.json.name }}/\
+        vivid-{{ vivid_index.json.name }}-x86_64-unknown-linux-gnu.tar.gz"
+      dest: "/usr/local/bin/"
+      extra_opts:
+        - '--transform'
+        - 's/.*\///g'
+        - '--add-file'
+        - "vivid-{{ vivid_index.json.name }}-x86_64-unknown-linux-gnu/vivid"
+      mode: u+x,g+x,o+x
+      remote_src: yes
+    become: yes
+    when: vivid_index.json.name not in vivid_installed_version.stdout_lines | first | default('empty')
+  
+  - name: Configure GNOME settings
+    tags: molecule-notest
+    dconf:
+      state: present
+      key: "{{ item.key }}"
+      value: "{{ item.value }}"
+    loop: "{{ dconf_settings }}"
+    when: not fedora_edition == 'server'
+  when: not fedora_edition == 'silverblue'
 
-- name: Install awscli
-  become: true
-  pip:
-    name: awscli
-    state: present
-    executable: pip3
-    extra_args: '--user'
-
-- name: Linux | Get the latest published full release of vivid
-  uri:
-    url: https://api.github.com/repos/sharkdp/vivid/releases/latest
-    return_content: yes
-  check_mode: no
-  register: vivid_index
-
-# This task avoids downloading vivid every time
-- name: Linux | Check if vivid is present with the right version
-  command: "/usr/local/bin/vivid --version"
-  register: vivid_installed_version
-  ignore_errors: yes
-  changed_when: false
-  failed_when: false
-  check_mode: no
-
-- name: Linux | Install vivid
-  unarchive:
-    src: "https://github.com/sharkdp/vivid/releases/download/{{ vivid_index.json.name }}/\
-      vivid-{{ vivid_index.json.name }}-x86_64-unknown-linux-gnu.tar.gz"
-    dest: "/usr/local/bin/"
-    extra_opts:
-      - '--transform'
-      - 's/.*\///g'
-      - '--add-file'
-      - "vivid-{{ vivid_index.json.name }}-x86_64-unknown-linux-gnu/vivid"
-    mode: u+x,g+x,o+x
-    remote_src: yes
-  become: yes
-  when: vivid_index.json.name not in vivid_installed_version.stdout_lines | first | default('empty')

@@ -3,19 +3,27 @@
 
 fedora_common_packages:
   - '@Development Tools'
-  - python3-pip
-  - npm
-  - vim
-  - fzf
-  - ripgrep
-  - fd-find
   - asciinema
-  - zsh
+  - fd-find
+  - fzf
+  - glances
   - htop
   - iftop
-  - glances
   - iotop
+  - npm
   - pv
+  - python3-pip
+  - ripgrep
+  - vim
+  - zsh
+  - bind-utils
+  - openssl
+  - tmux
+  - nmap
+  - wireshark
+  - dconf
+  - dbus-tools
+  - python3-psutil
 
 fedora_workstation_repos:
   - google-chrome
@@ -23,27 +31,154 @@ fedora_workstation_repos:
   - rpmfusion-nonfree-steam
 
 fedora_workstation_packages:
-  # - '@Fedora Workstation'
-  - vim-X11
-  - keepass
-  - putty
+  - alsa-plugins-pulseaudio
+  - buildah
   - gnome-tweak-tool
+  - google-chrome-stable
+  - icedtea-web
+  - java-openjdk
+  - keepass
+  - libcurl
   - openvpn
-  - vagrant
-  - vagrant-libvirt
+  - podman
+  - putty
   - qt-virt-manager
   - remmina
-  - flash-plugin
-  - alsa-plugins-pulseaudio
-  - libcurl
-  - google-chrome-stable
-  - java-openjdk
-  - icedtea-web
+  - vagrant
+  - vagrant-libvirt
+  - vim-X11
   - wine
-  - buildah
-  - podman
+  # - '@Fedora Workstation'
+
+fedora_silverblue_overlays:
+  - alsa-firmware
+  - gnome-tweak-tool
+  - google-chrome
+  - google-chrome-stable
+  - tilix
+  - zsh
+
+fedora_flatpaks:
+  - com.spotify.Client
+  - com.discordapp.Discord
+  - com.slack.Slack
+  - com.valvesoftware.Steam
+  - com.visualstudio.code
+  - io.bit3.WhatsAppQT
+  - org.clementine_player.Clementine
+  - org.fedoraproject.MediaWriter
+  - org.gnome.baobab
+  - org.gnome.Calculator
+  - org.gnome.Calendar
+  - org.gnome.Characters
+  - org.gnome.Cheese
+  - org.gnome.clocks
+  - org.gnome.Connections
+  - org.gnome.Contacts
+  - org.gnome.eog
+  - org.gnome.Evince
+  - org.gnome.Extensions
+  - org.gnome.FileRoller
+  - org.gnome.font-viewer
+  - org.gnome.gedit
+  - org.gnome.Logs
+  - org.gnome.Maps
+  - org.gnome.NautilusPreviewer
+  - org.gnome.Screenshot
+  - org.gnome.SoundRecorder
+  - org.gnome.Weather
+  - org.keepassxc.KeePassXC
+  - org.libreoffice.LibreOffice
+  - org.remmina.Remmina
+  - org.signal.Signal
+  - org.videolan.VLC
+  - us.zoom.Zoom
+
+fedora_toolbox_packages:
+  - '@C Development Tools and Libraries'
+  - ansible
+  - glibc-langpack-en # to properly set LANG
+  - libcurl
+  - libxcrypt-compat # for homebrew
+  - putty
+  - rust
+  - rust-src
+  - ShellCheck
+  - vim-enhanced # for vimdiff
+  - vim-X11
 
 fedora_server_packages:
   - '@Infrastructure Server'
-  - neofetch
   - byobu
+  - neofetch
+
+brew_packages:
+  - act
+  - chamber
+  - checkov
+  - fluxctl
+  - go-jira
+  - helm
+  - homebrew/cask-fonts/font-dejavu-sans-mono-for-powerline
+  - k3sup
+  - k9s
+  - kubectl
+  - kustomize
+  - mycli
+  - pgcli
+  - pre-commit
+  - shfmt
+  - sops
+  - terraform-docs
+  - tflint
+  - tfsec
+  - unzip
+  - yamllint
+  - yq
+
+pip_packages:
+  - boto
+  - boto3
+  - pyotp
+  - requests
+  - bs4
+  - notify2
+  - powerline
+  - powerline-status
+
+dconf_settings:
+  - key: "/org/gnome/settings-daemon/plugins/color/night-light-enabled"
+    value: "true"
+  - key: "/org/gnome/settings-daemon/plugins/power/ambient-enabled"
+    value: "false"
+  - key: "/org/gnome/shell/extensions/caffeine/user-enabled"
+    value: "true"
+  - key: "/org/gnome/desktop/peripherals/touchpad/tap-to-click"
+    value: "true"
+  - key: "/org/gnome/desktop/peripherals/touchpad/two-finger-scrolling-enabled"
+    value: "true"
+  - key: "/org/gnome/desktop/privacy/disable-microphone"
+    value: "false"
+  - key: "/org/gnome/desktop/privacy/report-technical-problems"
+    value: "true"
+  - key: "/org/gnome/desktop/interface/clock-show-seconds"
+    value: "true"
+  - key: "/org/gnome/desktop/interface/clock-show-weekday"
+    value: "true"
+  - key: "/org/gnome/desktop/interface/gtk-theme"
+    value: "'Adwaita-dark'"
+  - key: "/org/gnome/desktop/interface/locate-pointer"
+    value: "true"
+  - key: "/org/gnome/desktop/interface/show-battery-percentage"
+    value: "true"
+  - key: "/org/gnome/desktop/calendar/show-weekdate"
+    value: "true"
+  - key: "/org/gnome/desktop/background/picture-uri"
+    value: "'file:///usr/share/backgrounds/gnome/adwaita-timed.xml'"
+
+# Used by meta dependency to set up gnome-extensions
+gnome_extension_ids:
+  - 19   # user themes
+  - 517  # caffeine
+  - 779  # clipboard indicator
+  - 906  # sound output device chooser
