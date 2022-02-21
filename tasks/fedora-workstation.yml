@@ -33,7 +33,7 @@
 - name: Install Packages
   become: yes
   dnf:
-    name: "{{ fedora_workstation_packages }}"
+    name: "{{ fedora_workstation_packages + fedora_toolbox_packages }}"
     state: present
   retries: 5
   delay: 2

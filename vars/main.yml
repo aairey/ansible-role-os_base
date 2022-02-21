@@ -1,55 +1,6 @@
 ---
 # vars file for aairey.os_base
 
-fedora_common_packages:
-  - '@Development Tools'
-  - asciinema
-  - fd-find
-  - fzf
-  - glances
-  - htop
-  - iftop
-  - iotop
-  - npm
-  - pv
-  - python3-pip
-  - ripgrep
-  - vim
-  - zsh
-  - bind-utils
-  - openssl
-  - tmux
-  - nmap
-  - wireshark
-  - dconf
-  - dbus-tools
-  - python3-psutil
-
-fedora_workstation_repos:
-  - google-chrome
-  - rpmfusion-nonfree-nvidia-driver
-  - rpmfusion-nonfree-steam
-
-fedora_workstation_packages:
-  - alsa-plugins-pulseaudio
-  - buildah
-  - gnome-tweak-tool
-  - google-chrome-stable
-  - icedtea-web
-  - java-openjdk
-  - keepass
-  - libcurl
-  - openvpn
-  - podman
-  - putty
-  - qt-virt-manager
-  - remmina
-  - vagrant
-  - vagrant-libvirt
-  - vim-X11
-  - wine
-  # - '@Fedora Workstation'
-
 fedora_silverblue_overlays:
   - alsa-firmware
   - gnome-tweak-tool
@@ -57,11 +8,13 @@ fedora_silverblue_overlays:
   - google-chrome-stable
   - tilix
   - zsh
+  # LocalPackages: displaylink-1.9.1-2.x86_64
 
 fedora_flatpaks:
-  - com.spotify.Client
   - com.discordapp.Discord
+  - com.etlegacy.ETLegacy
   - com.slack.Slack
+  - com.spotify.Client
   - com.valvesoftware.Steam
   - com.visualstudio.code
   - io.bit3.WhatsAppQT
@@ -85,6 +38,7 @@ fedora_flatpaks:
   - org.gnome.Maps
   - org.gnome.NautilusPreviewer
   - org.gnome.Screenshot
+  - org.gnome.seahorse.Application
   - org.gnome.SoundRecorder
   - org.gnome.Weather
   - org.keepassxc.KeePassXC
@@ -94,9 +48,45 @@ fedora_flatpaks:
   - org.videolan.VLC
   - us.zoom.Zoom
 
+fedora_common_packages:
+  - '@Development Tools'
+  - asciinema
+  - bind-utils
+  - buildah
+  - dbus-tools
+  - dconf
+  - dnf-plugin-system-upgrade
+  - fd-find
+  - fzf
+  - git-lfs
+  - glances
+  - htop
+  - iftop
+  - iotop
+  - jq
+  - mycli
+  - nmap
+  - npm
+  - openssl
+  - pgcli
+  - podman
+  - pv
+  - python3-libsemanage
+  - python3-pip
+  - python3-psutil
+  - ripgrep
+  - rpmconf
+  - ShellCheck
+  - symlinks
+  - tmux
+  - vim
+  - wireshark
+  - zsh
+
 fedora_toolbox_packages:
   - '@C Development Tools and Libraries'
   - ansible
+  - awscli
   - glibc-langpack-en # to properly set LANG
   - libcurl
   - libxcrypt-compat # for homebrew
@@ -104,8 +94,27 @@ fedora_toolbox_packages:
   - rust
   - rust-src
   - ShellCheck
+  - sops
   - vim-enhanced # for vimdiff
   - vim-X11
+  - ykman
+  - yubikey-manager
+
+fedora_workstation_repos:
+  - google-chrome
+  - rpmfusion-nonfree-nvidia-driver
+  - rpmfusion-nonfree-steam
+
+fedora_workstation_packages:
+  - alsa-plugins-pulseaudio
+  - gnome-tweak-tool
+  - google-chrome-stable
+  - openvpn
+  - qt-virt-manager
+  - vagrant
+  - vagrant-libvirt
+  - wine
+  # - '@Fedora Workstation'
 
 fedora_server_packages:
   - '@Infrastructure Server'
@@ -114,21 +123,20 @@ fedora_server_packages:
 
 brew_packages:
   - act
+  - bat
   - chamber
   - checkov
   - fluxctl
+  - git-sizer
   - go-jira
+  - hadolint
   - helm
   - homebrew/cask-fonts/font-dejavu-sans-mono-for-powerline
   - k3sup
   - k9s
-  - kubectl
   - kustomize
-  - mycli
-  - pgcli
-  - pre-commit
+  - saml2aws
   - shfmt
-  - sops
   - terraform-docs
   - tflint
   - tfsec
@@ -139,12 +147,12 @@ brew_packages:
 pip_packages:
   - boto
   - boto3
-  - pyotp
-  - requests
   - bs4
   - notify2
-  - powerline
   - powerline-status
+  - pre-commit
+  - pyotp
+  - requests
 
 dconf_settings:
   - key: "/org/gnome/settings-daemon/plugins/color/night-light-enabled"
