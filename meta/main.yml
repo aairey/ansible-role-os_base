@@ -14,14 +14,23 @@ galaxy_info:
         - 30
         - 33
         - 35
+        - 36
 
   galaxy_tags:
     - system
 
 dependencies:
-  #  - name: markosamuli.linuxbrew
-  #    when: fedora_edition == 'workstation' or fedora_edition == 'toolbox'
-  #  - name: cimion-io.asdf
-  #    when: fedora_edition == 'workstation' or fedora_edition == 'toolbox'
-  #  - name: jaredhocutt.gnome_extensions
-  #    when: not fedora_edition == 'server'
+  - name: markosamuli.linuxbrew
+    src: https://github.com/aairey/ansible-linuxbrew #FIXME use upstream once PR is merged
+    version: master
+    vars: 
+      linuxbrew_use_installer: true
+    when:
+      - fedora_edition == 'workstation' or fedora_edition == 'toolbox' 
+      - not ansible_connection == 'buildah'
+  - name: cimon-io.asdf
+    when:
+      - fedora_edition == 'workstation' or fedora_edition == 'toolbox'
+      - not ansible_connection == 'buildah'
+  - name: jaredhocutt.gnome_extensions
+    when: fedora_edition == 'workstation' or fedora_edition == 'silverblue'

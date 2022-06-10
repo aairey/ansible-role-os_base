@@ -59,6 +59,7 @@
     community.general.homebrew:
       name: "{{ brew_packages }}"
       state: present
+    when: not ansible_connection == 'buildah'
 
   - name: Install pip Packages
     ansible.builtin.pip:
