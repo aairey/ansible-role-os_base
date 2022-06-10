@@ -94,10 +94,8 @@ fedora_toolbox_packages:
   - rust
   - rust-src
   - ShellCheck
-  - sops
   - vim-enhanced # for vimdiff
   - vim-X11
-  - ykman
   - yubikey-manager
 
 fedora_workstation_repos:
@@ -137,6 +135,7 @@ brew_packages:
   - kustomize
   - saml2aws
   - shfmt
+  - sops
   - terraform-docs
   - tflint
   - tfsec
