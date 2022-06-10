@@ -53,7 +53,7 @@
       key: "{{ item.key }}"
       value: "{{ item.value }}"
     loop: "{{ dconf_settings }}"
-    when: not fedora_edition == 'server'
+    when: fedora_edition == 'workstation' or fedora_edition == 'silverblue'
 
   - name: Install brew Packages
     community.general.homebrew:
