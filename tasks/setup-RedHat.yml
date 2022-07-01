@@ -9,9 +9,16 @@
   delay: 2
   register: redhat_packages_installation
   until: redhat_packages_installation is succeeded
+  when: not fedora_edition == 'silverblue'
 
 - include_tasks: fedora-workstation.yml
   when: fedora_edition == 'workstation'
 
 - include_tasks: fedora-server.yml
   when: fedora_edition == 'server'
+
+- include_tasks: fedora-silverblue.yml
+  when: fedora_edition == 'silverblue'
+
+- include_tasks: fedora-toolbox.yml
+  when: fedora_edition == 'toolbox'

@@ -1,21 +1,102 @@
 ---
 # vars file for aairey.os_base
 
+fedora_silverblue_overlays:
+  - alsa-firmware
+  - gnome-tweak-tool
+  - google-chrome
+  - google-chrome-stable
+  - tilix
+  - zsh
+  # LocalPackages: displaylink-1.9.1-2.x86_64
+
+fedora_flatpaks:
+  - com.discordapp.Discord
+  - com.etlegacy.ETLegacy
+  - com.slack.Slack
+  - com.spotify.Client
+  - com.valvesoftware.Steam
+  - com.visualstudio.code
+  - io.bit3.WhatsAppQT
+  - org.clementine_player.Clementine
+  - org.fedoraproject.MediaWriter
+  - org.gnome.baobab
+  - org.gnome.Calculator
+  - org.gnome.Calendar
+  - org.gnome.Characters
+  - org.gnome.Cheese
+  - org.gnome.clocks
+  - org.gnome.Connections
+  - org.gnome.Contacts
+  - org.gnome.eog
+  - org.gnome.Evince
+  - org.gnome.Extensions
+  - org.gnome.FileRoller
+  - org.gnome.font-viewer
+  - org.gnome.gedit
+  - org.gnome.Logs
+  - org.gnome.Maps
+  - org.gnome.NautilusPreviewer
+  - org.gnome.Screenshot
+  - org.gnome.seahorse.Application
+  - org.gnome.SoundRecorder
+  - org.gnome.Weather
+  - org.keepassxc.KeePassXC
+  - org.libreoffice.LibreOffice
+  - org.remmina.Remmina
+  - org.signal.Signal
+  - org.videolan.VLC
+  - us.zoom.Zoom
+
 fedora_common_packages:
   - '@Development Tools'
-  - python3-pip
-  - npm
-  - vim
-  - fzf
-  - ripgrep
-  - fd-find
   - asciinema
-  - zsh
+  - bind-utils
+  - buildah
+  - dbus-tools
+  - dconf
+  - dnf-plugin-system-upgrade
+  - fd-find
+  - fzf
+  - git-lfs
+  - glances
   - htop
   - iftop
-  - glances
   - iotop
+  - jq
+  - mycli
+  - nmap
+  - npm
+  - openssl
+  - pgcli
+  - podman
   - pv
+  - python3-libsemanage
+  - python3-pip
+  - python3-psutil
+  - ripgrep
+  - rpmconf
+  - ShellCheck
+  - symlinks
+  - tmux
+  - vim
+  - wireshark
+  - zsh
+
+fedora_toolbox_packages:
+  - '@C Development Tools and Libraries'
+  - ansible
+  - awscli
+  - glibc-langpack-en # to properly set LANG
+  - libcurl
+  - libxcrypt-compat # for homebrew
+  - putty
+  - rust
+  - rust-src
+  - ShellCheck
+  - vim-enhanced # for vimdiff
+  - vim-X11
+  - yubikey-manager
 
 fedora_workstation_repos:
   - google-chrome
@@ -23,27 +104,89 @@ fedora_workstation_repos:
   - rpmfusion-nonfree-steam
 
 fedora_workstation_packages:
-  # - '@Fedora Workstation'
-  - vim-X11
-  - keepass
-  - putty
+  - alsa-plugins-pulseaudio
   - gnome-tweak-tool
+  - google-chrome-stable
   - openvpn
+  - qt-virt-manager
   - vagrant
   - vagrant-libvirt
-  - qt-virt-manager
-  - remmina
-  - flash-plugin
-  - alsa-plugins-pulseaudio
-  - libcurl
-  - google-chrome-stable
-  - java-openjdk
-  - icedtea-web
   - wine
-  - buildah
-  - podman
+  # - '@Fedora Workstation'
 
 fedora_server_packages:
   - '@Infrastructure Server'
-  - neofetch
   - byobu
+  - neofetch
+
+brew_packages:
+  - act
+  - bat
+  - chamber
+  - checkov
+  - fluxctl
+  - git-sizer
+  - go-jira
+  - hadolint
+  - helm
+  - homebrew/cask-fonts/font-dejavu-sans-mono-for-powerline
+  - k3sup
+  - k9s
+  - kustomize
+  - saml2aws
+  - shfmt
+  - sops
+  - terraform-docs
+  - tflint
+  - tfsec
+  - unzip
+  - yamllint
+  - yq
+
+pip_packages:
+  - boto
+  - boto3
+  - bs4
+  - checkov
+  - notify2
+  - powerline-status
+  - pre-commit
+  - pyotp
+  - requests
+
+dconf_settings:
+  - key: "/org/gnome/settings-daemon/plugins/color/night-light-enabled"
+    value: "true"
+  - key: "/org/gnome/settings-daemon/plugins/power/ambient-enabled"
+    value: "false"
+  - key: "/org/gnome/shell/extensions/caffeine/user-enabled"
+    value: "true"
+  - key: "/org/gnome/desktop/peripherals/touchpad/tap-to-click"
+    value: "true"
+  - key: "/org/gnome/desktop/peripherals/touchpad/two-finger-scrolling-enabled"
+    value: "true"
+  - key: "/org/gnome/desktop/privacy/disable-microphone"
+    value: "false"
+  - key: "/org/gnome/desktop/privacy/report-technical-problems"
+    value: "true"
+  - key: "/org/gnome/desktop/interface/clock-show-seconds"
+    value: "true"
+  - key: "/org/gnome/desktop/interface/clock-show-weekday"
+    value: "true"
+  - key: "/org/gnome/desktop/interface/gtk-theme"
+    value: "'Adwaita-dark'"
+  - key: "/org/gnome/desktop/interface/locate-pointer"
+    value: "true"
+  - key: "/org/gnome/desktop/interface/show-battery-percentage"
+    value: "true"
+  - key: "/org/gnome/desktop/calendar/show-weekdate"
+    value: "true"
+  - key: "/org/gnome/desktop/background/picture-uri"
+    value: "'file:///usr/share/backgrounds/gnome/adwaita-timed.xml'"
+
+# Used by meta dependency to set up gnome-extensions
+gnome_extension_ids:
+  - 19   # user themes
+  - 517  # caffeine
+  - 779  # clipboard indicator
+  - 906  # sound output device chooser

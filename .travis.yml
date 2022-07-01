@@ -10,18 +10,18 @@ env:
   global:
     ROLE_NAME: os_base
   matrix:
-    - ANSIBLE_VERSION=2.8
+    - ANSIBLE_VERSION=2.9
       MOLECULE_DISTRO=fedora30
       MOLECULE_FEDORA_EDITION=workstation
     - ANSIBLE_VERSION=2.9
       MOLECULE_DISTRO=fedora30
-      MOLECULE_FEDORA_EDITION=workstation
-    - ANSIBLE_VERSION=2.8
-      MOLECULE_DISTRO=fedora30
       MOLECULE_FEDORA_EDITION=server
-    - ANSIBLE_VERSION=2.9
-      MOLECULE_DISTRO=fedora30
-      MOLECULE_FEDORA_EDITION=server
+    - ANSIBLE_VERSION=5.0
+      MOLECULE_DISTRO=fedora35
+      MOLECULE_FEDORA_EDITION=silverblue
+    - ANSIBLE_VERSION=5.0
+      MOLECULE_DISTRO=fedora35
+      MOLECULE_FEDORA_EDITION=toolbox
 before_install:
   - sudo apt-get -qq update
 install:
