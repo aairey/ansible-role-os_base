@@ -68,6 +68,8 @@ fedora_common_packages:
   - nmap
   - npm
   - openssl
+  - perl
+  - perl-devel
   - pgcli
   - podman
   - pv
@@ -77,8 +79,10 @@ fedora_common_packages:
   - ripgrep
   - rpmconf
   - ShellCheck
+  - shfmt
   - symlinks
   - tmux
+  - unzip
   - vim
   - wireshark
   - zsh
@@ -123,7 +127,6 @@ brew_packages:
   - act
   - bat
   - chamber
-  - checkov
   - fluxctl
   - git-sizer
   - go-jira
@@ -134,13 +137,10 @@ brew_packages:
   - k9s
   - kustomize
   - saml2aws
-  - shfmt
   - sops
   - terraform-docs
   - tflint
   - tfsec
-  - unzip
-  - yamllint
   - yq
 
 pip_packages:
@@ -148,11 +148,13 @@ pip_packages:
   - boto3
   - bs4
   - checkov
+  - flake8
   - notify2
   - powerline-status
   - pre-commit
   - pyotp
   - requests
+  - yamllint
 
 dconf_settings:
   - key: "/org/gnome/settings-daemon/plugins/color/night-light-enabled"
