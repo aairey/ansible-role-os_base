@@ -132,7 +132,6 @@ brew_packages:
   - go-jira
   - hadolint
   - helm
-  - homebrew/cask-fonts/font-dejavu-sans-mono-for-powerline
   - k3sup
   - k9s
   - kustomize
