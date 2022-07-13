@@ -29,8 +29,11 @@ dependencies:
       - fedora_edition == 'workstation' or fedora_edition == 'toolbox' 
       - not ansible_connection == 'buildah'
   - name: cimon-io.asdf
+    src: https://github.com/aairey/ansible-role-asdf #FIXME use upstream once PR is merged
+    version: patch-1
     when:
       - fedora_edition == 'workstation' or fedora_edition == 'toolbox'
       - not ansible_connection == 'buildah'
-  - name: jaredhocutt.gnome_extensions
+  - name: jaredhocutt.gnome_extensions #FIXME switch to https://github.com/PeterMosmans/ansible-role-customize-gnome later
+    version: v0.1.2
     when: fedora_edition == 'workstation' or fedora_edition == 'silverblue'
