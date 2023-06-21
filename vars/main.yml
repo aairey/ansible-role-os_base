@@ -28,6 +28,7 @@ debian_flatpaks:
   - com.slack.Slack
   - com.spotify.Client
   - com.valvesoftware.Steam
+  - com.visualstudio.code
   - org.fedoraproject.MediaWriter
   - org.keepassxc.KeePassXC
   - org.libreoffice.LibreOffice
