@@ -5,3 +5,23 @@
   apt:
     name: "{{ debian_packages }}"
     state: present
+
+- name: Add the flathub flatpak repository remote to the system installation
+  become: yes
+  flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+
+- name: Install Flatpaks from flathub
+  become: yes
+  flatpak:
+    name: "{{ item }}"
+    remote: flathub
+  with_items: "{{ debian_flatpaks }}"
+
+- name: Enable Night Light
+  tags: molecule-notest
+  dconf:
+    key: /org/gnome/settings-daemon/plugins/color/night-light-enabled
+    value: "true"

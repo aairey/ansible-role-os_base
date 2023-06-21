@@ -1,0 +1,27 @@
+---
+dependency:
+  name: galaxy
+  options:
+    requirements-file: requirements.yml
+# unfortunately this scans everything including public collections pulled in
+# lint: |
+#   set -e
+#   yamllint .
+#   ansible-lint .
+#   flake8
+platforms:
+  - name: ${MOLECULE_DISTRO:-fedora38}-${TOX_ENVNAME:-notox}
+    image: docker.io/geerlingguy/docker-${MOLECULE_DISTRO:-fedora38}-ansible:latest
+    command: ${MOLECULE_DOCKER_COMMAND:-""}
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
+    pre_build_image: true
+provisioner:
+  name: ansible
+  config_options:
+    defaults:
+      interpreter_python: auto_silent
+      callback_enabled: profile_tasks, timer, yaml
+verifier:
+  name: ansible
