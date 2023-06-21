@@ -6,6 +6,9 @@
 - include_tasks: setup-Debian.yml
   when: ansible_os_family == 'Debian'
 
+- include_tasks: install_forticlient.yml
+  when: install_forticlient
+
 - name: Install extra tools
   block:
   - name: Install gtop

@@ -2,3 +2,4 @@
 # defaults file for aairey.os_base
 username: aairey
 fedora_edition: 'workstation'
+install_forticlient: false

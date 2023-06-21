@@ -1,6 +1,41 @@
 ---
 # vars file for aairey.os_base
 
+debian_packages:
+  - asciinema
+  - build-essential
+  - curl
+  - fd-find
+  - flatpak
+  - fzf
+  - git
+  - glances
+  - gnome-tweaks
+  - htop
+  - iftop
+  - iotop
+  - npm
+  - putty
+  - python3-pip
+  - pv
+  - ripgrep
+  - vim
+  - zsh
+
+debian_flatpaks:
+  - com.discordapp.Discord
+  - com.etlegacy.ETLegacy
+  - com.slack.Slack
+  - com.spotify.Client
+  - com.valvesoftware.Steam
+  - org.fedoraproject.MediaWriter
+  - org.keepassxc.KeePassXC
+  - org.libreoffice.LibreOffice
+  - org.remmina.Remmina
+  - org.signal.Signal
+  - org.videolan.VLC
+  - us.zoom.Zoom
+
 fedora_silverblue_overlays:
   - alsa-firmware
   - gnome-tweak-tool
@@ -18,7 +53,6 @@ fedora_flatpaks:
   - com.valvesoftware.Steam
   - com.visualstudio.code
   - io.bit3.WhatsAppQT
-  - org.clementine_player.Clementine
   - org.fedoraproject.MediaWriter
   - org.gnome.baobab
   - org.gnome.Calculator
@@ -53,6 +87,7 @@ fedora_common_packages:
   - asciinema
   - bind-utils
   - buildah
+  - compiler-rt
   - dbus-tools
   - dconf
   - dnf-plugin-system-upgrade
@@ -68,6 +103,7 @@ fedora_common_packages:
   - nmap
   - npm
   - openssl
+  - openssl-devel
   - perl
   - perl-devel
   - pgcli
