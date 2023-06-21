@@ -1,0 +1,25 @@
+---
+- name: Add Fortinet APT key
+  become: true
+  ansible.builtin.apt_key:
+    url: https://repo.fortinet.com/repo/forticlient/7.2/debian/DEB-GPG-KEY
+    state: present
+    # TODO - Verify key
+
+- name: Add Fortinet APT repository
+  become: true
+  ansible.builtin.apt_repository:
+    repo: deb [arch=amd64] https://repo.fortinet.com/repo/forticlient/7.2/debian/ stable non-free
+  register: forticlient_repository
+
+- name: Update package cache
+  become: true
+  ansible.builtin.apt:
+    update_cache: yes
+  when: forticlient_repository.changed
+
+- name: Install Forticlient
+  become: true
+  ansible.builtin.apt:
+    state: present
+    name: forticlient
